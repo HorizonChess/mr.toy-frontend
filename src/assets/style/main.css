@@ -11,6 +11,7 @@
 /* Components */
 @import 'cmps/AppHeader.css';
 @import 'cmps/AppFooter.css';
+@import 'cmps/UserMsg.css';
 
 
 .app {

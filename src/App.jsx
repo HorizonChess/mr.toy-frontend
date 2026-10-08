@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
+import { UserMsg } from './cmps/UserMsg.jsx'
 
 import { HomePage } from './pages/HomePage.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
@@ -21,6 +22,7 @@ export function App() {
                     </Routes>
                 </main>
                 <AppFooter />
+                <UserMsg />
             </section>
         </Router>
     )
