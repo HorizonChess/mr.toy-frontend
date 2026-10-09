@@ -13,6 +13,10 @@
 @import 'cmps/AppFooter.css';
 @import 'cmps/UserMsg.css';
 
+@import 'cmps/ToyIndex.css';
+@import 'cmps/ToyList.css';
+@import 'cmps/ToyPreview.css';
+
 
 .app {
     display: flex;

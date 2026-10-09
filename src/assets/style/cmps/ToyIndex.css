@@ -1,0 +1,13 @@
+.toy-index .add-btn {
+    display: inline-block;
+    margin-block: 0.6em;
+    padding: 0.5em 0.8em;
+    border-radius: 4px;
+    background-color: var(--clr2bg);
+}
+
+.toy-index .add-btn:hover {
+    background-color: var(--clr2);
+    color: white;
+    transition: .3s;
+}

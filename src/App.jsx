@@ -10,6 +10,7 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 
 import { HomePage } from './pages/HomePage.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
+import { ToyIndex } from './pages/ToyIndex.jsx'
 
 
 export function App() {
@@ -23,6 +24,7 @@ export function App() {
                         <Routes>
                             <Route element={<HomePage />} path="/" />
                             <Route element={<AboutUs />} path="/about" />
+                            <Route element={<ToyIndex />} path="/toy" />
                         </Routes>
                     </main>
                     <AppFooter />

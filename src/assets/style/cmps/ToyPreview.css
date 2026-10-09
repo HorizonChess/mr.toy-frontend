@@ -1,0 +1,24 @@
+.toy-preview {
+    text-align: center;
+    padding: 0.3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toy-preview h4 {
+    text-transform: capitalize;
+    color: black;
+}
+
+.toy-preview img {
+    max-width: 120px;
+}
+
+.toy-preview .in-stock {
+    color: var(--clr1);
+}
+
+.toy-preview .out-of-stock {
+    color: var(--clr2);
+}
