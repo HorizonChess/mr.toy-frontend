@@ -1,0 +1,10 @@
+.toy-edit form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    max-width: 400px;
+}
+
+.toy-edit select[multiple] {
+    min-height: 10em;
+}
