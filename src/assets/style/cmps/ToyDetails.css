@@ -1,0 +1,27 @@
+.toy-details {
+    padding-block: 1em;
+}
+
+.toy-details img {
+    max-width: 200px;
+}
+
+.toy-details .in-stock {
+    color: var(--clr1);
+}
+
+.toy-details .out-of-stock {
+    color: var(--clr2);
+}
+
+.toy-details .toy-labels {
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-block: 1em;
+}
+
+.toy-details .toy-labels li {
+    background-color: var(--clr2bg-light);
+    padding: 0.2em 0.6em;
+    border-radius: 1em;
+}
