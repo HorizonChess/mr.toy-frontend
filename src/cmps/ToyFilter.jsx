@@ -15,6 +15,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
     function handleChange({ target }) {
         let { value, name: field, type } = target
         value = type === 'number' ? +value : value
+        if (field === 'inStock') value = value === '' ? undefined : value === 'true'
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
@@ -29,6 +30,18 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                     value={filterByToEdit.txt}
                     onChange={handleChange}
                 />
+
+                <label htmlFor="inStock">Stock:</label>
+                <select
+                    id="inStock"
+                    name="inStock"
+                    value={filterByToEdit.inStock === undefined ? '' : String(filterByToEdit.inStock)}
+                    onChange={handleChange}
+                >
+                    <option value="">All</option>
+                    <option value="true">In stock</option>
+                    <option value="false">Out of stock</option>
+                </select>
             </form>
         </section>
     )
