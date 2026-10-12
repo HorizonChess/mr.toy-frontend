@@ -55,6 +55,19 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                 >
                     {labels.map(label => <option key={label} value={label}>{label}</option>)}
                 </select>
+
+                <label htmlFor="sortBy">Sort by:</label>
+                <select
+                    id="sortBy"
+                    name="sortBy"
+                    value={filterByToEdit.sortBy}
+                    onChange={handleChange}
+                >
+                    <option value="">None</option>
+                    <option value="name">Name</option>
+                    <option value="price">Price</option>
+                    <option value="createdAt">Newest</option>
+                </select>
             </form>
         </section>
     )
