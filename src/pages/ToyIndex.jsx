@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { loadToys, removeToyOptimistic } from '../store/actions/toy.actions.js'
+import { loadToys, removeToyOptimistic, setFilterBy } from '../store/actions/toy.actions.js'
 
+import { ToyFilter } from '../cmps/ToyFilter.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
 
 export function ToyIndex() {
@@ -19,6 +20,10 @@ export function ToyIndex() {
             })
     }, [filterBy])
 
+    function onSetFilter(filterBy) {
+        setFilterBy(filterBy)
+    }
+
     function onRemoveToy(toyId) {
         removeToyOptimistic(toyId)
             .then(() => {
@@ -32,6 +37,7 @@ export function ToyIndex() {
     return (
         <section className="toy-index">
             <h2>Our Toys</h2>
+            <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
             <Link to="/toy/edit" className="add-btn">Add Toy</Link>
             {!isLoading
                 ? <ToyList toys={toys} onRemoveToy={onRemoveToy} />
