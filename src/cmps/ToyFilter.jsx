@@ -1,12 +1,14 @@
 import { useState, useRef } from 'react'
 
 import { utilService } from '../services/util.service.js'
+import { toyService } from '../services/toy.service.js'
 import { useEffectUpdate } from '../hooks/useEffectUpdate.js'
 
 export function ToyFilter({ filterBy, onSetFilter }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const onSetFilterDebounce = useRef(utilService.debounce(onSetFilter, 300))
+    const labels = toyService.getLabels()
 
     useEffectUpdate(() => {
         onSetFilterDebounce.current(filterByToEdit)
@@ -16,6 +18,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
         let { value, name: field, type } = target
         value = type === 'number' ? +value : value
         if (field === 'inStock') value = value === '' ? undefined : value === 'true'
+        if (type === 'select-multiple') value = [...target.selectedOptions].map(option => option.value)
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
@@ -41,6 +44,16 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                     <option value="">All</option>
                     <option value="true">In stock</option>
                     <option value="false">Out of stock</option>
+                </select>
+
+                <label htmlFor="labels">Labels:</label>
+                <select multiple
+                    id="labels"
+                    name="labels"
+                    value={filterByToEdit.labels}
+                    onChange={handleChange}
+                >
+                    {labels.map(label => <option key={label} value={label}>{label}</option>)}
                 </select>
             </form>
         </section>
