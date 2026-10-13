@@ -25,3 +25,13 @@
     padding: 0.2em 0.6em;
     border-radius: 1em;
 }
+
+.toy-details .btn-chat {
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
+    font-size: 1.5em;
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+}

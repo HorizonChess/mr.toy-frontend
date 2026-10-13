@@ -4,8 +4,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toyService } from '../services/toy.service.js'
 import { showErrorMsg } from '../services/event-bus.service.js'
 
+import { NicePopup } from '../cmps/NicePopup.jsx'
+import { Chat } from '../cmps/Chat.jsx'
+
 export function ToyDetails() {
     const [toy, setToy] = useState(null)
+    const [isChatOpen, setIsChatOpen] = useState(false)
     const { toyId } = useParams()
     const navigate = useNavigate()
 
@@ -38,6 +42,16 @@ export function ToyDetails() {
             <p>Added on: {new Date(toy.createdAt).toLocaleDateString()}</p>
             <Link to={`/toy/edit/${toy._id}`}>Edit</Link> &nbsp;
             <Link to="/toy">Back</Link>
+
+            <button className="btn-chat" title="Chat with us" onClick={() => setIsChatOpen(true)}>💬</button>
+            <NicePopup
+                isOpen={isChatOpen}
+                onClose={() => setIsChatOpen(false)}
+                heading={`Chat about ${toy.name}`}
+                footing="We usually reply within seconds"
+            >
+                <Chat />
+            </NicePopup>
         </section>
     )
 }
