@@ -1,0 +1,31 @@
+.chat .msg-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    min-height: 10em;
+}
+
+.chat .msg {
+    max-width: 80%;
+    padding: 0.4em 0.8em;
+    border-radius: 1em;
+}
+
+.chat .msg.me {
+    align-self: flex-end;
+    background-color: var(--clr1bg);
+}
+
+.chat .msg.shop {
+    align-self: flex-start;
+    background-color: var(--clr2bg-light);
+}
+
+.chat form {
+    display: flex;
+    margin-top: 1em;
+}
+
+.chat input {
+    flex-grow: 1;
+}
