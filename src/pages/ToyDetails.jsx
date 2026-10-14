@@ -40,6 +40,16 @@ export function ToyDetails() {
                 {toy.labels.map(label => <li key={label}>{label}</li>)}
             </ul>
             <p>Added on: {new Date(toy.createdAt).toLocaleDateString()}</p>
+            {toy.msgs && toy.msgs.length > 0 && (
+                <section className="toy-msgs">
+                    <h4>Messages</h4>
+                    <ul className="clean-list">
+                        {toy.msgs.map(msg =>
+                            <li key={msg.id}><strong>{msg.by.fullname}:</strong> {msg.txt}</li>
+                        )}
+                    </ul>
+                </section>
+            )}
             <Link to={`/toy/edit/${toy._id}`}>Edit</Link> &nbsp;
             <Link to="/toy">Back</Link>
 
