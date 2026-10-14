@@ -35,3 +35,11 @@
     width: 2.5em;
     height: 2.5em;
 }
+
+.toy-details .toy-msgs {
+    margin-block: 1em;
+}
+
+.toy-details .toy-msgs li {
+    padding-block: 0.25em;
+}
