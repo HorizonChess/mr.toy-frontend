@@ -8,3 +8,19 @@
     display: flex;
     gap: 15px;
 }
+
+.online-status {
+    font-size: 0.85em;
+    padding: 0.1em 0.6em;
+    border-radius: 1em;
+}
+
+.online-status.online {
+    background-color: var(--clr1bg);
+    color: var(--clr1);
+}
+
+.online-status.offline {
+    background-color: var(--clr2);
+    color: white;
+}
