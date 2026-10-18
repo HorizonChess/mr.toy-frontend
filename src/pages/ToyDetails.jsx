@@ -28,36 +28,37 @@ export function ToyDetails() {
     }
 
     if (!toy) return <div>Loading...</div>
+    const { _id, name, imgUrl, price, inStock, labels, createdAt, msgs } = toy
     return (
         <section className="toy-details">
-            <h1>{toy.name}</h1>
-            {toy.imgUrl && <img src={toy.imgUrl} alt={toy.name} />}
-            <h5>Price: ${toy.price.toLocaleString()}</h5>
-            <p className={toy.inStock ? 'in-stock' : 'out-of-stock'}>
-                {toy.inStock ? 'In stock' : 'Out of stock'}
+            <h1>{name}</h1>
+            {imgUrl && <img src={imgUrl} alt={name} />}
+            <h5>Price: ${price.toLocaleString()}</h5>
+            <p className={inStock ? 'in-stock' : 'out-of-stock'}>
+                {inStock ? 'In stock' : 'Out of stock'}
             </p>
             <ul className="toy-labels clean-list flex">
-                {toy.labels.map(label => <li key={label}>{label}</li>)}
+                {labels.map(label => <li key={label}>{label}</li>)}
             </ul>
-            <p>Added on: {new Date(toy.createdAt).toLocaleDateString()}</p>
-            {toy.msgs && toy.msgs.length > 0 && (
+            <p>Added on: {new Date(createdAt).toLocaleDateString()}</p>
+            {msgs && msgs.length > 0 && (
                 <section className="toy-msgs">
                     <h4>Messages</h4>
                     <ul className="clean-list">
-                        {toy.msgs.map(msg =>
+                        {msgs.map(msg =>
                             <li key={msg.id}><strong>{msg.by.fullname}:</strong> {msg.txt}</li>
                         )}
                     </ul>
                 </section>
             )}
-            <Link to={`/toy/edit/${toy._id}`}>Edit</Link> &nbsp;
+            <Link to={`/toy/edit/${_id}`}>Edit</Link> &nbsp;
             <Link to="/toy">Back</Link>
 
             <button className="btn-chat" title="Chat with us" onClick={() => setIsChatOpen(true)}>💬</button>
             <NicePopup
                 isOpen={isChatOpen}
                 onClose={() => setIsChatOpen(false)}
-                heading={`Chat about ${toy.name}`}
+                heading={`Chat about ${name}`}
                 footing="We usually reply within seconds"
             >
                 <Chat />
