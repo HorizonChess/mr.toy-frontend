@@ -1,6 +1,8 @@
 /* Buttons - chunky "toy" buttons with a pressable 3D edge.
-   Set --btn-clr to recolor; every other shade is mixed from it */
-:where(button, .btn) {
+   Set --btn-clr to recolor; every other shade is mixed from it.
+   (Not wrapped in :where - links need .btn to beat the base `a { color: inherit }`) */
+button,
+.btn {
     --btn-clr: var(--clr-primary);
 
     display: inline-grid;
