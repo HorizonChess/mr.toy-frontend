@@ -46,11 +46,12 @@
     }
 }
 
+/* Quiet when online, only offline is worth drawing attention to */
 .online-status {
     grid-area: status;
 
     &.online {
-        color: var(--clr-success);
+        color: var(--clr-text-muted);
     }
 
     &.offline {

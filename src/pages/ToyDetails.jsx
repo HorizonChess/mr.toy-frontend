@@ -38,7 +38,7 @@ export function ToyDetails() {
             <section className="toy-info card">
                 <h1>{name}</h1>
                 <p className="toy-price">${price.toLocaleString()}</p>
-                <p className={`pill with-dot ${inStock ? 'in-stock' : 'out-of-stock'}`}>
+                <p className={`status ${inStock ? 'in-stock' : 'out-of-stock'}`}>
                     {inStock ? 'In stock' : 'Out of stock'}
                 </p>
                 <ul className="toy-labels clean-list">

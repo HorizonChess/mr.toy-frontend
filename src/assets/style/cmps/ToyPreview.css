@@ -38,8 +38,7 @@
         color: var(--clr-primary-dark);
     }
 
-    .pill {
+    .status {
         justify-self: center;
-        margin: 0;
     }
 }

@@ -1,7 +1,7 @@
 .app-footer {
     padding-block: var(--space-5);
-    background-color: var(--clr-brown);
-    color: var(--clr-bg);
+    background-color: var(--clr-surface);
+    color: var(--clr-text);
     border-top: 6px solid;
     border-image: var(--stripe) 1;
     text-align: center;
@@ -10,5 +10,18 @@
 
     p {
         margin: 0;
+    }
+
+    /* Name in the primary color, with an underline that grows from the center on hover */
+    a {
+        color: var(--clr-primary);
+        font-weight: 700;
+        background: linear-gradient(currentColor, currentColor) no-repeat center bottom / 0% 2px;
+        padding-bottom: 2px;
+        transition: background-size var(--dur-md) var(--ease-out);
+
+        &:hover {
+            background-size: 100% 2px;
+        }
     }
 }

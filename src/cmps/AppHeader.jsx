@@ -18,7 +18,7 @@ export function AppHeader() {
                         )}
                     </Link>
                 </h1>
-                <span className={`online-status pill with-dot ${isOnline ? 'online' : 'offline'}`}>
+                <span className={`online-status status ${isOnline ? 'online' : 'offline'}`}>
                     {isOnline ? 'Online' : 'Offline'}
                 </span>
                 <nav className="app-nav">

@@ -9,7 +9,7 @@ export function ToyPreview({ toy }) {
             </div>
             <h4>{name}</h4>
             <p className="toy-price">${price.toLocaleString()}</p>
-            <p className={`pill with-dot ${inStock ? 'in-stock' : 'out-of-stock'}`}>
+            <p className={`status ${inStock ? 'in-stock' : 'out-of-stock'}`}>
                 {inStock ? 'In stock' : 'Out of stock'}
             </p>
         </article>
