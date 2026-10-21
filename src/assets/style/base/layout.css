@@ -1,23 +1,38 @@
+/* App shell: header / page / footer, the page row takes the leftover height */
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 100dvh;
+}
+
+/* Centered content column with full-bleed escape hatch:
+   children sit in "content", a child with .full spans edge to edge */
 .main-layout {
-  margin: 0 auto;
-  padding-left: 1.6rem;
-  padding-right: 1.6rem;
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--layout-gutter), 1fr)
+    [content-start] min(100% - 2 * var(--layout-gutter), var(--layout-max))
+    [content-end] minmax(var(--layout-gutter), 1fr)
+    [full-end];
 
+  & > * {
+    grid-column: content;
+  }
+
+  & > .full {
+    grid-column: full;
+  }
 }
 
+/* Every page fades up when its route mounts */
+main.main-layout {
+  align-content: start;
+  padding-block: var(--space-6) var(--space-7);
 
-
-.container {
-  max-width: 800px;
-  padding: 1em;
-  margin: auto;
+  /* 'backwards', not 'both': a transform that stays applied after the animation
+     would trap position: fixed children (popup, chat button) inside the page */
+  & > * {
+    animation: fade-up var(--dur-slow) var(--ease-out) backwards;
+  }
 }
-
-footer {
-  background-color: var(--clr1);
-  color: var(--clr1bg);
-  padding: 1em;
-  text-align: center;
-}
-
-

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { StyledEngineProvider } from '@mui/material/styles'
 
 import { store } from './store/store.js'
 
@@ -20,24 +21,27 @@ export function App() {
 
     return (
         <Provider store={store}>
-            <Router>
-                <section className="app">
-                    <AppHeader />
-                    <main className='main-layout'>
-                        <Routes>
-                            <Route element={<HomePage />} path="/" />
-                            <Route element={<AboutUs />} path="/about" />
-                            <Route element={<ToyIndex />} path="/toy" />
-                            <Route element={<ToyEdit />} path="/toy/edit" />
-                            <Route element={<ToyEdit />} path="/toy/edit/:toyId" />
-                            <Route element={<ToyDetails />} path="/toy/:toyId" />
-                            <Route element={<ToyDashboard />} path="/toy-dashboard" />
-                        </Routes>
-                    </main>
-                    <AppFooter />
-                    <UserMsg />
-                </section>
-            </Router>
+            {/* injectFirst: MUI styles load before ours, so our CSS can override them */}
+            <StyledEngineProvider injectFirst>
+                <Router>
+                    <section className="app">
+                        <AppHeader />
+                        <main className='main-layout'>
+                            <Routes>
+                                <Route element={<HomePage />} path="/" />
+                                <Route element={<AboutUs />} path="/about" />
+                                <Route element={<ToyIndex />} path="/toy" />
+                                <Route element={<ToyEdit />} path="/toy/edit" />
+                                <Route element={<ToyEdit />} path="/toy/edit/:toyId" />
+                                <Route element={<ToyDetails />} path="/toy/:toyId" />
+                                <Route element={<ToyDashboard />} path="/toy-dashboard" />
+                            </Routes>
+                        </main>
+                        <AppFooter />
+                        <UserMsg />
+                    </section>
+                </Router>
+            </StyledEngineProvider>
         </Provider>
     )
 }

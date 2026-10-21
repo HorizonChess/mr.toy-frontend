@@ -4,9 +4,11 @@
 
 /* Base */
 @import 'base/base.css';
+@import 'base/animations.css';
 @import 'base/helpers.css';
 @import 'base/layout.css';
 @import 'base/forms.css';
+@import 'base/mui.css';
 
 /* Components */
 @import 'cmps/AppHeader.css';
@@ -22,18 +24,5 @@
 @import 'cmps/ToyDetails.css';
 @import 'cmps/ToyEdit.css';
 @import 'cmps/ToyDashboard.css';
-
-
-.app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.app > * {
-    width: 100%;
-}
-
-main {
-    flex-grow: 1;
-}
+@import 'cmps/HomePage.css';
+@import 'cmps/AboutUs.css';

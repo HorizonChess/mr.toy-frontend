@@ -1,45 +1,126 @@
 .toy-details {
-    padding-block: 1em;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "img info"
+        "img msgs";
+    align-items: start;
+    gap: var(--space-5) var(--space-6);
+
+    /* Big image on a sunny backdrop, gently floating */
+    .toy-img {
+        grid-area: img;
+        display: grid;
+        place-items: center;
+        aspect-ratio: 1;
+        border-radius: var(--radius-lg);
+        background: radial-gradient(circle at 50% 60%,
+                color-mix(in oklab, var(--clr-accent) 45%, white),
+                var(--clr-accent-light));
+        box-shadow: var(--shadow-sm);
+
+        img {
+            width: 75%;
+            aspect-ratio: 1;
+            object-fit: contain;
+            animation: float 4s ease-in-out infinite;
+        }
+    }
+
+    .toy-info {
+        grid-area: info;
+        display: grid;
+        gap: var(--space-3);
+
+        h1 {
+            margin: 0;
+            font-size: var(--fs-hero);
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .toy-price {
+        font-family: var(--ff-heading);
+        font-size: var(--fs-xl);
+        font-weight: 700;
+        color: var(--clr-primary-dark);
+    }
+
+    /* Equal-width label chips that wrap onto new rows */
+    .toy-labels {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+        gap: var(--space-2);
+
+        .pill {
+            justify-self: stretch;
+            justify-content: center;
+            color: var(--clr-blue);
+        }
+    }
+
+    .toy-date {
+        color: var(--clr-text-muted);
+        font-size: var(--fs-sm);
+    }
+
+    .toy-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 10rem));
+        gap: var(--space-3);
+        margin-top: var(--space-2);
+    }
+
+    .toy-msgs {
+        grid-area: msgs;
+
+        h4 {
+            font-size: var(--fs-lg);
+        }
+
+        ul {
+            display: grid;
+            gap: var(--space-2);
+        }
+
+        li {
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-md);
+            background-color: var(--clr-bg);
+        }
+    }
+
+    /* Floating chat bubble */
+    .btn-chat {
+        --btn-clr: var(--clr-orange);
+
+        position: fixed;
+        bottom: var(--space-5);
+        left: var(--space-5);
+        z-index: 4;
+        font-size: 1.5em;
+        box-shadow: var(--shadow-md);
+        animation: bounce 2s var(--ease-bounce) 1s 3;
+    }
 }
 
-.toy-details img {
-    max-width: 200px;
-}
+@media (width < 760px) {
+    .toy-details {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas:
+            "img"
+            "info"
+            "msgs";
+        padding-bottom: 4rem; /* room for the floating chat button */
 
-.toy-details .in-stock {
-    color: var(--clr1);
-}
-
-.toy-details .out-of-stock {
-    color: var(--clr2);
-}
-
-.toy-details .toy-labels {
-    flex-wrap: wrap;
-    gap: 0.5em;
-    margin-block: 1em;
-}
-
-.toy-details .toy-labels li {
-    background-color: var(--clr2bg-light);
-    padding: 0.2em 0.6em;
-    border-radius: 1em;
-}
-
-.toy-details .btn-chat {
-    position: fixed;
-    bottom: 1em;
-    left: 1em;
-    font-size: 1.5em;
-    border-radius: 50%;
-    width: 2.5em;
-    height: 2.5em;
-}
-
-.toy-details .toy-msgs {
-    margin-block: 1em;
-}
-
-.toy-details .toy-msgs li {
-    padding-block: 0.25em;
+        .toy-img {
+            width: min(100%, 22rem);
+            justify-self: center;
+        }
+    }
 }

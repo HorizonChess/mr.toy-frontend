@@ -38,7 +38,7 @@ export function ToyIndex() {
         <section className="toy-index">
             <h2>Our Toys</h2>
             <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-            <Link to="/toy/edit" className="add-btn">Add Toy</Link>
+            <Link to="/toy/edit" className="btn add-btn">+ Add Toy</Link>
             {!isLoading
                 ? <ToyList toys={toys} onRemoveToy={onRemoveToy} />
                 : <div>Loading...</div>

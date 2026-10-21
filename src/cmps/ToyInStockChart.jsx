@@ -1,6 +1,8 @@
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 
+import { utilService } from '../services/util.service.js'
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend)
 
 export function ToyInStockChart({ stats }) {
@@ -10,13 +12,14 @@ export function ToyInStockChart({ stats }) {
             {
                 label: 'In stock (%)',
                 data: stats.map(stat => stat.inStockPct),
-                backgroundColor: '#ee9b00', // --clr2bg
+                backgroundColor: utilService.getCssVar('--clr-success'),
             },
         ],
     }
 
     // Each label's % is independent (they don't add up to 100), so a fixed 0-100% bar axis, not a pie
     const options = {
+        maintainAspectRatio: false,
         indexAxis: 'y',
         scales: {
             x: { min: 0, max: 100, ticks: { callback: value => value + '%' } },
@@ -24,9 +27,11 @@ export function ToyInStockChart({ stats }) {
     }
 
     return (
-        <section className="chart-card">
+        <section className="chart-card stock-chart">
             <h3>Inventory by label</h3>
-            <Bar data={data} options={options} />
+            <div className="chart-wrap">
+                <Bar data={data} options={options} />
+            </div>
         </section>
     )
 }

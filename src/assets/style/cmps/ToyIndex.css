@@ -1,13 +1,28 @@
-.toy-index .add-btn {
-    display: inline-block;
-    margin-block: 0.6em;
-    padding: 0.5em 0.8em;
-    border-radius: 4px;
-    background-color: var(--clr2bg);
-}
+.toy-index {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "title add"
+        "filter filter"
+        "list list";
+    align-items: center;
+    gap: var(--space-5);
 
-.toy-index .add-btn:hover {
-    background-color: var(--clr2);
-    color: white;
-    transition: .3s;
+    h2 {
+        grid-area: title;
+        margin: 0;
+    }
+
+    .add-btn {
+        grid-area: add;
+    }
+
+    .toy-filter {
+        grid-area: filter;
+    }
+
+    /* The list, its "Loading..." or its "No toys" message */
+    & > :last-child {
+        grid-area: list;
+    }
 }

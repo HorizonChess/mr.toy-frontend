@@ -1,16 +1,75 @@
 .toy-dashboard {
-    padding-block: 1em;
-}
-
-.toy-dashboard .charts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1em;
-    margin-block: 1em;
+    gap: var(--space-5);
+
+    h2 {
+        margin: 0;
+    }
+
+    /* The two per-label charts pair up on top, the timeline gets the full width below.
+       Row heights come from the grid - the charts (maintainAspectRatio: false) fill them */
+    .charts {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(2, clamp(20rem, 42vh, 26rem));
+        grid-template-areas:
+            "price stock"
+            "sales sales";
+        gap: var(--space-5);
+    }
+
+    .price-chart {
+        grid-area: price;
+        --card-clr: var(--clr-primary);
+    }
+
+    .stock-chart {
+        grid-area: stock;
+        --card-clr: var(--clr-green);
+    }
+
+    .sales-chart {
+        grid-area: sales;
+        --card-clr: var(--clr-blue);
+    }
+
+    /* Title on top, the chart takes the rest of the card */
+    .chart-card {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: var(--space-3);
+        padding: var(--space-5);
+        background-color: var(--clr-surface);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        border-top: 5px solid var(--card-clr);
+        transition: box-shadow var(--dur-md);
+
+        &:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        h3 {
+            margin: 0;
+            font-size: var(--fs-lg);
+        }
+    }
+
+    /* Chart.js sizes the canvas to this box: it needs a positioned, shrinkable parent */
+    .chart-wrap {
+        position: relative;
+        min-width: 0;
+        min-height: 0;
+    }
 }
 
-.toy-dashboard .chart-card {
-    padding: 1em;
-    background-color: var(--gray1);
-    border-radius: 0.5em;
+@media (width < 760px) {
+    .toy-dashboard .charts {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 20rem 24rem 20rem;
+        grid-template-areas:
+            "price"
+            "stock"
+            "sales";
+    }
 }

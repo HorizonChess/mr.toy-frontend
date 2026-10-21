@@ -1,24 +1,44 @@
+/* Subgrid again: the preview's 4 children sit on the card's first 4 rows */
 .toy-preview {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
     text-align: center;
-    padding: 0.3em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.toy-preview h4 {
-    text-transform: capitalize;
-    color: black;
-}
+    .toy-img {
+        justify-self: stretch;
+        display: grid;
+        place-items: center;
+        aspect-ratio: 4 / 3;
+        border-radius: var(--radius-md);
+        background: radial-gradient(circle at 50% 60%,
+                color-mix(in oklab, var(--card-clr) 35%, white),
+                color-mix(in oklab, var(--card-clr) 12%, white));
 
-.toy-preview img {
-    max-width: 120px;
-}
+        /* Sized from the box's width (box is 4:3, so 70% wide fits its height) */
+        img {
+            width: 70%;
+            aspect-ratio: 1;
+            object-fit: contain;
+        }
+    }
 
-.toy-preview .in-stock {
-    color: var(--clr1);
-}
+    h4 {
+        margin: 0;
+        font-size: var(--fs-lg);
+        text-transform: capitalize;
+    }
 
-.toy-preview .out-of-stock {
-    color: var(--clr2);
+    .toy-price {
+        margin: 0;
+        font-family: var(--ff-heading);
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--clr-primary-dark);
+    }
+
+    .status {
+        justify-self: center;
+    }
 }

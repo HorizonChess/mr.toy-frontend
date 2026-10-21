@@ -18,17 +18,19 @@ export function ToySalesChart({ days = 14 }) {
             {
                 label: 'Toys sold (demo data)',
                 data: sales.map(sale => sale.count),
-                borderColor: '#ae2012', // --clr2
-                backgroundColor: '#ae2012',
+                borderColor: utilService.getCssVar('--clr-blue'),
+                backgroundColor: utilService.getCssVar('--clr-blue'),
                 tension: 0.3,
             },
         ],
     }
 
     return (
-        <section className="chart-card">
+        <section className="chart-card sales-chart">
             <h3>Daily sales</h3>
-            <Line data={data} />
+            <div className="chart-wrap">
+                <Line data={data} options={{ maintainAspectRatio: false }} />
+            </div>
         </section>
     )
 }

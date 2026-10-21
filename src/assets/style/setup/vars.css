@@ -1,14 +1,74 @@
+/* Breakpoints (CSS vars can't be used inside @media, so they live here as a reference):
+   mobile: < 640px | tablet: 640px - 960px | desktop: > 960px */
+
 :root {
-  --clr1: #087f81;
-  --clr2: #ae2012;
+  /* Brand palette - warm toy-store primaries */
+  --clr-red: #d4553d;
+  --clr-orange: #f7882f;
+  --clr-yellow: #ffc93c;
+  --clr-green: #3aa856;
+  --clr-blue: #2f80c9;
+  --clr-brown: #4a2c1d;
 
-  --clr1bg: #c3eddf;
-  --clr1bg-light: #c1f1e1;
-  --clr2bg: #ee9b00;
-  --clr2bg-light: #e9d8a6;
+  --clr-primary: var(--clr-red);
+  --clr-accent: var(--clr-yellow);
+  --clr-success: var(--clr-green);
+  --clr-danger: var(--clr-red);
 
-  --gray1: rgb(240, 240, 240);
-  --gray2: rgb(155, 155, 155);
-  --gray3: rgb(44, 44, 44);
+  /* Derived shades - mixed from the brand colors instead of hardcoded */
+  --clr-primary-light: color-mix(in oklab, var(--clr-primary) 12%, white);
+  --clr-primary-dark: color-mix(in oklab, var(--clr-primary) 75%, black);
+  --clr-accent-light: color-mix(in oklab, var(--clr-accent) 25%, white);
 
-} 
+  /* Surfaces & text */
+  --clr-bg: #fff7ec;
+  --clr-surface: #ffffff;
+  --clr-text: #3b2418;
+  --clr-text-muted: color-mix(in oklab, var(--clr-text) 60%, var(--clr-bg));
+  --clr-border: color-mix(in oklab, var(--clr-text) 14%, transparent);
+
+  /* Rainbow stripe (header / footer accent) */
+  --stripe: linear-gradient(90deg,
+      var(--clr-red) 0 20%, var(--clr-orange) 20% 40%, var(--clr-yellow) 40% 60%,
+      var(--clr-green) 60% 80%, var(--clr-blue) 80% 100%);
+
+  /* Typography */
+  --ff-heading: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  --ff-body: 'Nunito', system-ui, sans-serif;
+
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: clamp(1.6rem, 1.3rem + 1.4vw, 2.25rem);
+  --fs-hero: clamp(2.4rem, 1.6rem + 4vw, 4.25rem);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* Shape & depth (warm-tinted shadows) */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgb(74 44 29 / 0.08), 0 2px 6px rgb(74 44 29 / 0.06);
+  --shadow-md: 0 4px 12px rgb(74 44 29 / 0.1), 0 12px 28px rgb(74 44 29 / 0.1);
+  --shadow-lg: 0 16px 40px rgb(74 44 29 / 0.2);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 150ms;
+  --dur-md: 300ms;
+  --dur-slow: 600ms;
+
+  /* Layout */
+  --layout-max: 1200px;
+  --layout-gutter: clamp(1rem, 4vw, 2rem);
+}

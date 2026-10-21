@@ -1,24 +1,42 @@
+/* Toast: slides in from the right, text | close button */
 .user-msg {
-    background-color: lightgray;
-    padding: 1.5em 2.5em;
+    --msg-clr: var(--clr-text);
+
     position: fixed;
-    bottom: 0;
-    right: 1em;
+    bottom: var(--space-5);
+    right: var(--space-5);
+    z-index: 20;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-4);
+    max-width: min(90vw, 24rem);
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-5);
+    border-radius: var(--radius-md);
+    background-color: var(--msg-clr);
     color: white;
-    border-radius: 2px;
-    font-size: 1.1em;
-}
+    font-weight: 700;
+    box-shadow: var(--shadow-lg);
+    animation: slide-in-right var(--dur-md) var(--ease-bounce);
 
-.user-msg.success {
-    background-color: var(--clr1);
-}
+    &.success {
+        --msg-clr: var(--clr-success);
+    }
 
-.user-msg.error {
-    background-color: var(--clr2);
-}
+    &.error {
+        --msg-clr: var(--clr-danger);
+    }
 
-.user-msg button {
-    font-size: .8em;
-    float: right;
-    margin: .5em;
+    /* Button comes first in the markup, the grid puts it on the right */
+    button {
+        --btn-clr: white;
+
+        grid-column: 2;
+        grid-row: 1;
+        padding: 0;
+        width: 2em;
+        aspect-ratio: 1;
+        color: var(--msg-clr);
+        box-shadow: none;
+    }
 }

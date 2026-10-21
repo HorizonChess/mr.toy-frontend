@@ -105,9 +105,9 @@ export function ToyEdit() {
                     In stock
                 </label>
 
-                <div>
+                <div className="form-actions">
                     <button>{toyToEdit._id ? 'Save' : 'Add'}</button>
-                    <Link to="/toy">Cancel</Link>
+                    <Link to="/toy" className="btn btn-outline btn-secondary">Cancel</Link>
                 </div>
             </form>
         </section>

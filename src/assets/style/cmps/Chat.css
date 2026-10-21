@@ -1,31 +1,39 @@
-.chat .msg-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4em;
-    min-height: 10em;
-}
+.chat {
+    display: grid;
+    gap: var(--space-4);
 
-.chat .msg {
-    max-width: 80%;
-    padding: 0.4em 0.8em;
-    border-radius: 1em;
-}
+    /* My bubbles in the right column, the shop's in the left */
+    .msg-list {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-content: start;
+        gap: var(--space-2);
+        min-height: 10em;
+    }
 
-.chat .msg.me {
-    align-self: flex-end;
-    background-color: var(--clr1bg);
-}
+    .msg {
+        padding: 0.45em 0.9em;
+        border-radius: var(--radius-md);
+        animation: pop-in var(--dur-md) var(--ease-bounce);
 
-.chat .msg.shop {
-    align-self: flex-start;
-    background-color: var(--clr2bg-light);
-}
+        &.me {
+            grid-column: 2;
+            justify-self: end;
+            background-color: var(--clr-primary-light);
+            border-bottom-right-radius: 0.2em;
+        }
 
-.chat form {
-    display: flex;
-    margin-top: 1em;
-}
+        &.shop {
+            grid-column: 1;
+            justify-self: start;
+            background-color: var(--clr-accent-light);
+            border-bottom-left-radius: 0.2em;
+        }
+    }
 
-.chat input {
-    flex-grow: 1;
+    form {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: var(--space-2);
+    }
 }

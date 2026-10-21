@@ -1,20 +1,74 @@
 .toy-list {
-    list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    padding-left: 0;
-    gap: 0.6em;
-    margin-block: 0.6em;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+    gap: var(--space-5);
 }
 
-.toy-list li {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: var(--clr1bg);
-    padding: 0.65em;
+/* Each card spans 5 rows of the list and adopts them with subgrid:
+   image / name / price / stock / actions line up across every card in a row */
+.toy-card {
+    --card-clr: var(--clr-red);
+
+    grid-row: span 5;
+    display: grid;
+    grid-template-rows: subgrid;
+    /* minmax(0, ...) lets the column shrink below the image's natural width */
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-2);
+    padding: var(--space-3) var(--space-3) var(--space-4);
+    background-color: var(--clr-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+        translate var(--dur-md) var(--ease-bounce),
+        box-shadow var(--dur-md) var(--ease-out);
+
+    &:nth-child(5n + 2) { --card-clr: var(--clr-orange); }
+    &:nth-child(5n + 3) { --card-clr: var(--clr-yellow); }
+    &:nth-child(5n + 4) { --card-clr: var(--clr-green); }
+    &:nth-child(5n + 5) { --card-clr: var(--clr-blue); }
+
+    &:hover {
+        translate: 0 -6px;
+        box-shadow: var(--shadow-md);
+
+        .toy-img img {
+            animation: wiggle var(--dur-slow) var(--ease-out);
+        }
+    }
+
+    /* Explicit placement: the remove button overlaps the image's corner (same cell) */
+    .toy-preview {
+        grid-row: 1 / span 4;
+        grid-column: 1;
+    }
+
+    .toy-actions {
+        grid-row: 5;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-2);
+        font-size: var(--fs-sm);
+
+        .btn {
+            padding-inline: 0.5em;
+        }
+    }
+
+    .btn-remove {
+        grid-row: 1;
+        grid-column: 1;
+        justify-self: end;
+        align-self: start;
+        margin: var(--space-2);
+        background-color: var(--clr-surface);
+        font-size: var(--fs-sm);
+    }
 }
 
-.toy-list .toy-actions {
-    text-align: center;
+@media (width < 640px) {
+    .toy-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3);
+    }
 }

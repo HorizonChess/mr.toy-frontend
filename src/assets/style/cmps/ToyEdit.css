@@ -1,10 +1,57 @@
-.toy-edit form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    max-width: 400px;
+.toy-edit {
+    display: grid;
+    grid-template-columns: minmax(0, 36rem);
+    justify-content: center;
+
+    /* Two-column form: labels | fields. Full-width rows span both */
+    form {
+        display: grid;
+        grid-template-columns: 7rem minmax(0, 1fr);
+        align-items: center;
+        gap: var(--space-4);
+        padding: var(--space-6);
+        background-color: var(--clr-surface);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        border-top: 5px solid var(--clr-primary);
+    }
+
+    select[multiple] {
+        min-height: 10em;
+
+        option {
+            padding: 0.2em 0.4em;
+            border-radius: var(--radius-sm);
+        }
+
+        option:checked {
+            background-color: var(--clr-primary-light);
+            color: var(--clr-primary-dark);
+        }
+    }
+
+    label[for='inStock'] {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        align-items: center;
+        gap: var(--space-2);
+    }
+
+    .form-actions {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3);
+        margin-top: var(--space-2);
+    }
 }
 
-.toy-edit select[multiple] {
-    min-height: 10em;
+@media (width < 640px) {
+    .toy-edit form {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-2);
+        padding: var(--space-5);
+    }
 }

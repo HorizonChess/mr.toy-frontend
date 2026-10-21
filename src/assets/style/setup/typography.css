@@ -1,2 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+/* Fonts are loaded with <link> in index.html (faster than @import, and safe after bundling) */
+
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: var(--fs-xl);
+}
