@@ -20,9 +20,11 @@ export function ToyPriceChart({ stats }) {
     }
 
     return (
-        <section className="chart-card">
+        <section className="chart-card price-chart">
             <h3>Average price per label</h3>
-            <Bar data={data} />
+            <div className="chart-wrap">
+                <Bar data={data} options={{ maintainAspectRatio: false }} />
+            </div>
         </section>
     )
 }

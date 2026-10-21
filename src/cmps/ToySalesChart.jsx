@@ -26,9 +26,11 @@ export function ToySalesChart({ days = 14 }) {
     }
 
     return (
-        <section className="chart-card">
+        <section className="chart-card sales-chart">
             <h3>Daily sales</h3>
-            <Line data={data} />
+            <div className="chart-wrap">
+                <Line data={data} options={{ maintainAspectRatio: false }} />
+            </div>
         </section>
     )
 }
