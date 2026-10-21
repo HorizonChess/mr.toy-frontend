@@ -1,6 +1,8 @@
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 
+import { utilService } from '../services/util.service.js'
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend)
 
 export function ToyInStockChart({ stats }) {
@@ -10,7 +12,7 @@ export function ToyInStockChart({ stats }) {
             {
                 label: 'In stock (%)',
                 data: stats.map(stat => stat.inStockPct),
-                backgroundColor: '#ee9b00', // --clr2bg
+                backgroundColor: utilService.getCssVar('--clr-success'),
             },
         ],
     }

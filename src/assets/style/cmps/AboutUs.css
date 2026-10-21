@@ -1,0 +1,11 @@
+.about-page {
+    display: grid;
+    grid-template-columns: minmax(0, 48rem);
+    gap: var(--space-4);
+
+    p {
+        margin: 0;
+        font-size: var(--fs-lg);
+        border-left: 6px solid var(--clr-accent);
+    }
+}

@@ -1,0 +1,81 @@
+.home-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-7);
+    min-height: 60vh;
+
+    .hero-txt {
+        display: grid;
+        gap: var(--space-4);
+        justify-items: start;
+
+        h2 {
+            margin: 0;
+            font-size: var(--fs-hero);
+            font-weight: 700;
+
+            span {
+                color: var(--clr-primary);
+                white-space: nowrap;
+            }
+        }
+
+        p {
+            margin: 0;
+            font-size: var(--fs-lg);
+            color: var(--clr-text-muted);
+        }
+
+        .btn {
+            font-size: var(--fs-lg);
+            padding: 0.7em 1.6em;
+        }
+    }
+}
+
+/* 3x2 grid of colorful toy blocks, each floating on its own beat */
+.hero-blocks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+
+    span {
+        --block-clr: var(--clr-red);
+
+        display: grid;
+        place-items: center;
+        aspect-ratio: 1;
+        border-radius: var(--radius-md);
+        background-color: var(--block-clr);
+        color: white;
+        font-family: var(--ff-heading);
+        font-size: clamp(2rem, 1rem + 4vw, 4rem);
+        font-weight: 700;
+        box-shadow:
+            inset 0 -8px 0 color-mix(in oklab, var(--block-clr) 70%, black),
+            var(--shadow-md);
+        rotate: calc((var(--i) - 2.5) * 3deg);
+        animation:
+            pop-in var(--dur-slow) var(--ease-bounce) calc(var(--i) * 80ms) both,
+            float 3s ease-in-out calc(var(--i) * 300ms) infinite;
+
+        &:nth-child(6n + 2) { --block-clr: var(--clr-orange); }
+        &:nth-child(6n + 3) { --block-clr: var(--clr-yellow); }
+        &:nth-child(6n + 4) { --block-clr: var(--clr-green); }
+        &:nth-child(6n + 5) { --block-clr: var(--clr-blue); }
+        &:nth-child(6n + 6) { --block-clr: var(--clr-primary-dark); }
+    }
+}
+
+@media (width < 760px) {
+    .home-page {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-6);
+        min-height: auto;
+    }
+
+    .hero-blocks {
+        max-width: 22rem;
+    }
+}

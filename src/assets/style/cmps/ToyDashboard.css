@@ -1,16 +1,43 @@
 .toy-dashboard {
-    padding-block: 1em;
-}
-
-.toy-dashboard .charts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1em;
-    margin-block: 1em;
-}
+    gap: var(--space-5);
 
-.toy-dashboard .chart-card {
-    padding: 1em;
-    background-color: var(--gray1);
-    border-radius: 0.5em;
+    h2 {
+        margin: 0;
+    }
+
+    .charts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+        gap: var(--space-5);
+    }
+
+    .chart-card {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: var(--space-3);
+        padding: var(--space-5);
+        background-color: var(--clr-surface);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        border-top: 5px solid var(--card-clr, var(--clr-primary));
+        transition: box-shadow var(--dur-md);
+
+        &:nth-child(2) { --card-clr: var(--clr-green); }
+        &:nth-child(3) { --card-clr: var(--clr-blue); }
+
+        &:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        h3 {
+            margin: 0;
+            font-size: var(--fs-lg);
+        }
+
+        /* Let the canvas shrink with the grid cell */
+        canvas {
+            min-width: 0;
+        }
+    }
 }

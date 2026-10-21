@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react'
+import { Chart as ChartJS } from 'chart.js'
 
 import { toyService } from '../services/toy.service.js'
+import { utilService } from '../services/util.service.js'
 import { showErrorMsg } from '../services/event-bus.service.js'
 
 import { ToyPriceChart } from '../cmps/ToyPriceChart.jsx'
 import { ToyInStockChart } from '../cmps/ToyInStockChart.jsx'
 import { ToySalesChart } from '../cmps/ToySalesChart.jsx'
+
+// Chart text matches the app's font and text color
+ChartJS.defaults.font.family = utilService.getCssVar('--ff-body')
+ChartJS.defaults.color = utilService.getCssVar('--clr-text')
 
 export function ToyDashboard() {
     const [stats, setStats] = useState(null)

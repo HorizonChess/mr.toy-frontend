@@ -5,7 +5,8 @@ export const utilService = {
     loadFromStorage,
     saveToStorage,
     animateCSS,
-    debounce
+    debounce,
+    getCssVar,
 }
 
 function makeId(length = 6) {
@@ -70,4 +71,8 @@ function debounce(func, timeout = 300) {
             func.apply(this, args)
         }, timeout)
     }
+}
+// Reads a CSS custom property from :root, e.g. for canvas charts that can't use var()
+function getCssVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim()
 }
