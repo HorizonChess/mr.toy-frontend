@@ -12,6 +12,7 @@ export const toyService = {
     getEmptyToy,
     getDefaultFilter,
     getLabels,
+    getStats,
 }
 
 function query(filterBy = {}) {
@@ -32,6 +33,10 @@ function save(toy) {
     } else {
         return httpService.post(BASE_URL, toy)
     }
+}
+
+function getStats() {
+    return httpService.get(BASE_URL + 'stats')
 }
 
 function getEmptyToy() {

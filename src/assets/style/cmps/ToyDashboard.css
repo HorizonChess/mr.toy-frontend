@@ -1,0 +1,11 @@
+.toy-dashboard {
+    padding-block: 1em;
+}
+
+.toy-dashboard .chart-card {
+    max-width: 700px;
+    margin-block: 1em;
+    padding: 1em;
+    background-color: var(--gray1);
+    border-radius: 0.5em;
+}
