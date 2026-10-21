@@ -1,0 +1,44 @@
+/* MUI themed from plain CSS, using MUI's stable class names.
+   This works because App wraps everything in <StyledEngineProvider injectFirst>:
+   MUI's own styles are injected first, so these rules win at equal specificity */
+
+.MuiInputBase-root,
+.MuiInputLabel-root,
+.MuiMenuItem-root,
+.MuiListItemText-primary,
+.MuiChip-label {
+    font-family: var(--ff-body);
+}
+
+.MuiOutlinedInput-root {
+    border-radius: var(--radius-sm);
+    background-color: var(--clr-surface);
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: var(--clr-primary);
+}
+
+.MuiInputLabel-root.Mui-focused {
+    color: var(--clr-primary);
+}
+
+.MuiCheckbox-root.Mui-checked {
+    color: var(--clr-primary);
+}
+
+.MuiChip-root {
+    background-color: var(--clr-primary-light);
+    color: var(--clr-primary-dark);
+    font-weight: 700;
+}
+
+/* Dropdown menus render in a portal on <body>, outside our components */
+.MuiMenu-paper {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+.MuiMenuItem-root.Mui-selected {
+    background-color: var(--clr-primary-light);
+}

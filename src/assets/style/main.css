@@ -8,6 +8,7 @@
 @import 'base/helpers.css';
 @import 'base/layout.css';
 @import 'base/forms.css';
+@import 'base/mui.css';
 
 /* Components */
 @import 'cmps/AppHeader.css';
