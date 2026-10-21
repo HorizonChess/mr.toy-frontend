@@ -1,8 +1,14 @@
 import { useState, useRef } from 'react'
+import { TextField, MenuItem, Checkbox, ListItemText, Chip, Box } from '@mui/material'
 
 import { utilService } from '../services/util.service.js'
 import { toyService } from '../services/toy.service.js'
 import { useEffectUpdate } from '../hooks/useEffectUpdate.js'
+
+// Shared by all filter fields
+const fieldProps = { size: 'small', sx: { minWidth: 180, bgcolor: 'white' } }
+// Keeps the label floating so an empty value can show its "All" / "None" option
+const emptyOptionSlotProps = { select: { displayEmpty: true }, inputLabel: { shrink: true } }
 
 export function ToyFilter({ filterBy, onSetFilter }) {
 
@@ -18,56 +24,70 @@ export function ToyFilter({ filterBy, onSetFilter }) {
         let { value, name: field, type } = target
         value = type === 'number' ? +value : value
         if (field === 'inStock') value = value === '' ? undefined : value === 'true'
-        if (type === 'select-multiple') value = [...target.selectedOptions].map(option => option.value)
+        // MUI Select gives an array, or a comma-separated string on browser autofill
+        if (field === 'labels' && typeof value === 'string') value = value.split(',')
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
     return (
         <section className="toy-filter">
             <form onSubmit={ev => ev.preventDefault()}>
-                <label htmlFor="txt">Name:</label>
-                <input type="text"
-                    id="txt"
+                <TextField {...fieldProps}
+                    label="Name"
                     name="txt"
                     placeholder="Search by name"
                     value={filterByToEdit.txt}
                     onChange={handleChange}
                 />
 
-                <label htmlFor="inStock">Stock:</label>
-                <select
-                    id="inStock"
+                <TextField select {...fieldProps}
+                    label="Stock"
                     name="inStock"
                     value={filterByToEdit.inStock === undefined ? '' : String(filterByToEdit.inStock)}
                     onChange={handleChange}
+                    slotProps={emptyOptionSlotProps}
                 >
-                    <option value="">All</option>
-                    <option value="true">In stock</option>
-                    <option value="false">Out of stock</option>
-                </select>
+                    <MenuItem value="">All</MenuItem>
+                    <MenuItem value="true">In stock</MenuItem>
+                    <MenuItem value="false">Out of stock</MenuItem>
+                </TextField>
 
-                <label htmlFor="labels">Labels:</label>
-                <select multiple
-                    id="labels"
+                <TextField select {...fieldProps}
+                    label="Labels"
                     name="labels"
                     value={filterByToEdit.labels}
                     onChange={handleChange}
+                    slotProps={{
+                        select: {
+                            multiple: true,
+                            renderValue: selected => (
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                    {selected.map(label => <Chip key={label} label={label} size="small" />)}
+                                </Box>
+                            ),
+                        },
+                    }}
                 >
-                    {labels.map(label => <option key={label} value={label}>{label}</option>)}
-                </select>
+                    {labels.map(label => (
+                        <MenuItem key={label} value={label}>
+                            <Checkbox size="small" checked={filterByToEdit.labels.includes(label)} />
+                            <ListItemText primary={label} />
+                        </MenuItem>
+                    ))}
+                </TextField>
 
-                <label htmlFor="sortBy">Sort by:</label>
-                <select
-                    id="sortBy"
+                <TextField select {...fieldProps}
+                    label="Sort by"
                     name="sortBy"
                     value={filterByToEdit.sortBy}
                     onChange={handleChange}
+                    slotProps={emptyOptionSlotProps}
                 >
-                    <option value="">None</option>
-                    <option value="name">Name</option>
-                    <option value="price">Price</option>
-                    <option value="createdAt">Newest</option>
-                </select>
+                    <MenuItem value="">None</MenuItem>
+                    <MenuItem value="name">Name</MenuItem>
+                    <MenuItem value="price">Price</MenuItem>
+                    <MenuItem value="createdAt">Newest</MenuItem>
+                </TextField>
             </form>
         </section>
     )
