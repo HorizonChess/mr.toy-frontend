@@ -33,10 +33,3 @@ main.main-layout {
     animation: fade-up var(--dur-slow) var(--ease-out) both;
   }
 }
-
-footer {
-  background-color: var(--clr1);
-  color: var(--clr1bg);
-  padding: 1em;
-  text-align: center;
-}

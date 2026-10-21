@@ -1,15 +1,24 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import { useOnlineStatus } from '../hooks/useOnlineStatus.js'
+
+const LOGO_TXT = 'Mister Toy'
 
 export function AppHeader() {
     const isOnline = useOnlineStatus()
 
     return (
-        <header className="app-header full main-layout">
+        <header className="app-header main-layout">
             <section className="header-container">
-                <h1>Mister Toy</h1>
-                <span className={`online-status ${isOnline ? 'online' : 'offline'}`}>
+                <h1 className="logo">
+                    <Link to="/" aria-label={LOGO_TXT}>
+                        {/* One span per letter so each can get its own color and bounce delay */}
+                        {[...LOGO_TXT].map((char, idx) =>
+                            <span key={idx} style={{ '--i': idx }} aria-hidden="true">{char}</span>
+                        )}
+                    </Link>
+                </h1>
+                <span className={`online-status pill with-dot ${isOnline ? 'online' : 'offline'}`}>
                     {isOnline ? 'Online' : 'Offline'}
                 </span>
                 <nav className="app-nav">

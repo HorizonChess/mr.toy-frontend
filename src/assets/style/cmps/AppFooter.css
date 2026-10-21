@@ -1,4 +1,14 @@
 .app-footer {
-    font-weight: 700;
-    font-size: 1.25em;
+    padding-block: var(--space-5);
+    background-color: var(--clr-brown);
+    color: var(--clr-bg);
+    border-top: 6px solid;
+    border-image: var(--stripe) 1;
+    text-align: center;
+    font-family: var(--ff-heading);
+    font-size: var(--fs-lg);
+
+    p {
+        margin: 0;
+    }
 }

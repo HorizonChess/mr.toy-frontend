@@ -1,26 +1,101 @@
 .app-header {
-    background-color: var(--clr1);
-    color: var(--clr1bg);
-    padding-block: 1em;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: color-mix(in oklab, var(--clr-surface) 92%, transparent);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-sm);
+    border-bottom: 6px solid;
+    border-image: var(--stripe) 1;
+
+    .header-container {
+        display: grid;
+        grid-template-columns: auto auto 1fr;
+        grid-template-areas: "logo status nav";
+        align-items: center;
+        gap: var(--space-3) var(--space-5);
+        padding-block: var(--space-3);
+    }
 }
 
-.app-nav {
-    display: flex;
-    gap: 15px;
+/* Multicolor logo: letter colors cycle through the 5 brand colors */
+.logo {
+    grid-area: logo;
+    margin: 0;
+    font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: pre;
+
+    span {
+        display: inline-block;
+        text-shadow: 0 2px 0 color-mix(in oklab, currentColor 55%, black);
+        transition: translate var(--dur-fast) var(--ease-bounce);
+
+        &:nth-child(5n + 1) { color: var(--clr-red); }
+        &:nth-child(5n + 2) { color: var(--clr-orange); }
+        &:nth-child(5n + 3) { color: var(--clr-yellow); }
+        &:nth-child(5n + 4) { color: var(--clr-green); }
+        &:nth-child(5n + 5) { color: var(--clr-blue); }
+    }
+
+    /* Letters hop one after another on hover */
+    a:hover span {
+        animation: bounce var(--dur-slow) var(--ease-bounce);
+        animation-delay: calc(var(--i) * 40ms);
+    }
 }
 
 .online-status {
-    font-size: 0.85em;
-    padding: 0.1em 0.6em;
-    border-radius: 1em;
+    grid-area: status;
+
+    &.online {
+        color: var(--clr-success);
+    }
+
+    &.offline {
+        color: var(--clr-danger);
+    }
 }
 
-.online-status.online {
-    background-color: var(--clr1bg);
-    color: var(--clr1);
+.app-nav {
+    grid-area: nav;
+    justify-self: end;
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--space-2);
+    font-weight: 700;
+
+    a {
+        padding: 0.4em 0.9em;
+        border-radius: var(--radius-pill);
+        transition: background-color var(--dur-fast), color var(--dur-fast);
+
+        &:hover {
+            background-color: var(--clr-accent-light);
+        }
+
+        &.active {
+            background-color: var(--clr-primary);
+            color: white;
+        }
+    }
 }
 
-.online-status.offline {
-    background-color: var(--clr2);
-    color: white;
+/* Mobile: logo + status on top, nav scrolls sideways underneath */
+@media (width < 640px) {
+    .app-header .header-container {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "logo status"
+            "nav nav";
+    }
+
+    .app-nav {
+        justify-self: stretch;
+        justify-content: start;
+        overflow-x: auto;
+        scrollbar-width: none;
+        font-size: var(--fs-sm);
+    }
 }
