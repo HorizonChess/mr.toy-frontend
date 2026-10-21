@@ -71,15 +71,4 @@
   /* Layout */
   --layout-max: 1200px;
   --layout-gutter: clamp(1rem, 4vw, 2rem);
-
-  /* Legacy names - kept until every component is migrated, then removed */
-  --clr1: var(--clr-primary);
-  --clr2: var(--clr-primary-dark);
-  --clr1bg: var(--clr-primary-light);
-  --clr1bg-light: var(--clr-primary-light);
-  --clr2bg: var(--clr-accent);
-  --clr2bg-light: var(--clr-accent-light);
-  --gray1: color-mix(in oklab, var(--clr-text) 5%, var(--clr-bg));
-  --gray2: var(--clr-text-muted);
-  --gray3: var(--clr-text);
 }
