@@ -1,0 +1,16 @@
+.toy-dashboard {
+    padding-block: 1em;
+}
+
+.toy-dashboard .charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1em;
+    margin-block: 1em;
+}
+
+.toy-dashboard .chart-card {
+    padding: 1em;
+    background-color: var(--gray1);
+    border-radius: 0.5em;
+}
