@@ -5,6 +5,7 @@ import { showErrorMsg } from '../services/event-bus.service.js'
 
 import { ToyPriceChart } from '../cmps/ToyPriceChart.jsx'
 import { ToyInStockChart } from '../cmps/ToyInStockChart.jsx'
+import { ToySalesChart } from '../cmps/ToySalesChart.jsx'
 
 export function ToyDashboard() {
     const [stats, setStats] = useState(null)
@@ -30,6 +31,7 @@ export function ToyDashboard() {
             <section className="charts">
                 <ToyPriceChart stats={stats} />
                 <ToyInStockChart stats={stats} />
+                <ToySalesChart />
             </section>
         </section>
     )
