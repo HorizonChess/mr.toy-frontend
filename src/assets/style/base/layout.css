@@ -30,7 +30,9 @@ main.main-layout {
   align-content: start;
   padding-block: var(--space-6) var(--space-7);
 
+  /* 'backwards', not 'both': a transform that stays applied after the animation
+     would trap position: fixed children (popup, chat button) inside the page */
   & > * {
-    animation: fade-up var(--dur-slow) var(--ease-out) both;
+    animation: fade-up var(--dur-slow) var(--ease-out) backwards;
   }
 }
