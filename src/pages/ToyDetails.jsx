@@ -31,18 +31,28 @@ export function ToyDetails() {
     const { _id, name, imgUrl, price, inStock, labels, createdAt, msgs } = toy
     return (
         <section className="toy-details">
-            <h1>{name}</h1>
-            {imgUrl && <img src={imgUrl} alt={name} />}
-            <h5>Price: ${price.toLocaleString()}</h5>
-            <p className={inStock ? 'in-stock' : 'out-of-stock'}>
-                {inStock ? 'In stock' : 'Out of stock'}
-            </p>
-            <ul className="toy-labels clean-list flex">
-                {labels.map(label => <li key={label}>{label}</li>)}
-            </ul>
-            <p>Added on: {new Date(createdAt).toLocaleDateString()}</p>
+            <div className="toy-img">
+                {imgUrl && <img src={imgUrl} alt={name} />}
+            </div>
+
+            <section className="toy-info card">
+                <h1>{name}</h1>
+                <p className="toy-price">${price.toLocaleString()}</p>
+                <p className={`pill with-dot ${inStock ? 'in-stock' : 'out-of-stock'}`}>
+                    {inStock ? 'In stock' : 'Out of stock'}
+                </p>
+                <ul className="toy-labels clean-list">
+                    {labels.map(label => <li key={label} className="pill">{label}</li>)}
+                </ul>
+                <p className="toy-date">Added on: {new Date(createdAt).toLocaleDateString()}</p>
+                <div className="toy-actions">
+                    <Link to={`/toy/edit/${_id}`} className="btn">Edit</Link>
+                    <Link to="/toy" className="btn btn-outline btn-secondary">Back</Link>
+                </div>
+            </section>
+
             {msgs && msgs.length > 0 && (
-                <section className="toy-msgs">
+                <section className="toy-msgs card">
                     <h4>Messages</h4>
                     <ul className="clean-list">
                         {msgs.map(msg =>
@@ -51,10 +61,8 @@ export function ToyDetails() {
                     </ul>
                 </section>
             )}
-            <Link to={`/toy/edit/${_id}`}>Edit</Link> &nbsp;
-            <Link to="/toy">Back</Link>
 
-            <button className="btn-chat" title="Chat with us" onClick={() => setIsChatOpen(true)}>💬</button>
+            <button className="btn-chat btn-icon" title="Chat with us" onClick={() => setIsChatOpen(true)}>💬</button>
             <NicePopup
                 isOpen={isChatOpen}
                 onClose={() => setIsChatOpen(false)}
