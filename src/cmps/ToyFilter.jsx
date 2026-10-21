@@ -5,8 +5,8 @@ import { utilService } from '../services/util.service.js'
 import { toyService } from '../services/toy.service.js'
 import { useEffectUpdate } from '../hooks/useEffectUpdate.js'
 
-// Shared by all filter fields
-const fieldProps = { size: 'small', sx: { minWidth: 180, bgcolor: 'white' } }
+// Shared by all filter fields - sizing comes from the grid in ToyFilter.css, colors from mui.css
+const fieldProps = { size: 'small', fullWidth: true }
 // Keeps the label floating so an empty value can show its "All" / "None" option
 const emptyOptionSlotProps = { select: { displayEmpty: true }, inputLabel: { shrink: true } }
 

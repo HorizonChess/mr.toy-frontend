@@ -1,11 +1,14 @@
+/* White card behind the MUI fields: the outlined labels float on the same color as the fields */
 .toy-filter {
-    background-color: var(--clr2bg);
-    padding: 1em;
-}
+    padding: var(--space-5);
+    background-color: var(--clr-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border-top: 5px solid var(--clr-accent);
 
-.toy-filter form {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5em 1em;
+    form {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+        gap: var(--space-4);
+    }
 }
