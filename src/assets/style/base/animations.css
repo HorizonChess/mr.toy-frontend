@@ -36,6 +36,15 @@
   40% { translate: 0 -0.3em; }
 }
 
+/* Ball-like jump: squash, leap (stretch), land (squash), settle. Set transform-origin: bottom */
+@keyframes hop {
+  0%, 100% { translate: 0 0; scale: 1 1; }
+  10% { translate: 0 0; scale: 1.2 0.8; }
+  45% { translate: 0 -80%; scale: 0.9 1.1; }
+  75% { translate: 0 0; scale: 1.2 0.8; }
+  88% { scale: 0.95 1.05; }
+}
+
 @keyframes float {
   0%, 100% { translate: 0 0; }
   50% { translate: 0 -10px; }

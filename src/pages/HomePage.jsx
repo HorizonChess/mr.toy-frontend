@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const HERO_BLOCKS = ['T', 'O', 'Y', 'S', '!', '★']
+const HERO_BLOCKS = [...'MR.TOY']
 
 export function HomePage() {
 
@@ -14,8 +14,10 @@ export function HomePage() {
 
             {/* Decorative toy blocks */}
             <div className="hero-blocks" aria-hidden="true">
-                {HERO_BLOCKS.map((char, idx) =>
-                    <span key={idx} style={{ '--i': idx }}>{char}</span>
+                {/* The '.' is a small bouncing cube of its own, sitting like a period after "MR" */}
+                {HERO_BLOCKS.map((char, idx) => char === '.'
+                    ? <span key={idx} className="dot" style={{ '--i': idx }}></span>
+                    : <span key={idx} style={{ '--i': idx }}>{char}</span>
                 )}
             </div>
         </section>
