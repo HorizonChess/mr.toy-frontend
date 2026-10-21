@@ -20,12 +20,6 @@
     align-items: center;
 }
 
-/* text helpers */
-
-.colored-text {
-    color: var(--clr1);
-}
-
 /* list helpers */
 
 .clean-list {
@@ -34,24 +28,44 @@
     list-style-type: none;
 }
 
-/* font awsome */
+/* card - white rounded surface */
 
-.fa {
-    font-family: fa;
+.card {
+    background-color: var(--clr-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5);
 }
 
-.fa.fa-facebook::before {
-    content: "\f39e";
+/* pill - tinted badge in the text's own color (set color, the rest follows) */
+
+.pill {
+    display: inline-grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: 0.4em;
+    justify-self: start;
+    padding: 0.2em 0.75em;
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    background-color: color-mix(in oklab, currentColor 14%, transparent);
+
+    &.with-dot::before {
+        content: '';
+        width: 0.5em;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: currentColor;
+    }
 }
 
-.fa.fa-twitter::before {
-    content: "\f099";
+/* stock status colors, shared by previews and details */
+
+.in-stock {
+    color: var(--clr-success);
 }
 
-.fa.fa-dribbble::before {
-    content: "\f17d";
-}
-
-.fa.fa-behance::before {
-    content: "\f1b4";
+.out-of-stock {
+    color: var(--clr-danger);
 }

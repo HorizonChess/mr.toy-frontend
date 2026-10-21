@@ -1,13 +1,14 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-}
-
-html {
 }
 
 body {
   margin: 0;
-  color: var(--gray3);
+  color: var(--clr-text);
+  background-color: var(--clr-bg);
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
@@ -16,7 +17,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: .5em 0 .5em;
+  margin: 0 0 0.5em;
 }
 
 p {
@@ -25,24 +26,29 @@ p {
 
 a {
   text-decoration: none;
-  color: unset;
+  color: inherit;
 }
 
-
-
-/* Dont stretch my Media */
+/* Dont stretch my Media */
 img,
 embed,
 video,
 object {
-  max-width: 100%
+  display: block;
+  max-width: 100%;
 }
 
-/* Simple and useful CSS Debugging Technique */
+:focus-visible {
+  outline: 3px solid var(--clr-blue);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--clr-accent);
+  color: var(--clr-text);
+}
+
+/* Simple and useful CSS Debugging Technique */
 .debug * {
-  outline: 1px solid gold
-}
-
-a.active {
-  text-decoration: underline;
+  outline: 1px solid gold;
 }
