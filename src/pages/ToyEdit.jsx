@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { toyService } from '../services/toy.service.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { saveToy } from '../store/actions/toy.actions.js'
-import { useConfirmTabClose } from '../hooks/useConfirmTabClose.js'
 
+import { ToyEditForm } from '../cmps/ToyEditForm.jsx'
 
 export function ToyEdit() {
     const navigate = useNavigate()
-    const [toyToEdit, setToyToEdit] = useState(toyService.getEmptyToy())
     const { toyId } = useParams()
-    const labels = toyService.getLabels()
-    const setHasChanges = useConfirmTabClose()
+    // Editing: null until the toy arrives, so the form only mounts with the real values
+    const [toyToEdit, setToyToEdit] = useState(toyId ? null : toyService.getEmptyToy())
 
     useEffect(() => {
         if (toyId) loadToy()
@@ -28,26 +27,9 @@ export function ToyEdit() {
             })
     }
 
-    function handleChange({ target }) {
-        let { value, type, name: field } = target
-        switch (type) {
-            case 'number':
-                value = +value
-                break
-            case 'checkbox':
-                value = target.checked
-                break
-            case 'select-multiple':
-                value = [...target.selectedOptions].map(option => option.value)
-                break
-        }
-        setToyToEdit((prevToy) => ({ ...prevToy, [field]: value }))
-        setHasChanges(true)
-    }
-
-    function onSaveToy(ev) {
-        ev.preventDefault()
-        saveToy(toyToEdit)
+    // Returns the promise so Formik knows when the submit is over (isSubmitting)
+    function onSaveToy(toy) {
+        return saveToy(toy)
             .then(() => {
                 showSuccessMsg('Toy Saved!')
                 navigate('/toy')
@@ -58,58 +40,11 @@ export function ToyEdit() {
             })
     }
 
-    const { name, price, labels: toyLabels, inStock } = toyToEdit
+    if (!toyToEdit) return <div>Loading...</div>
     return (
         <section className="toy-edit">
             <h2>{toyToEdit._id ? 'Edit' : 'Add'} Toy</h2>
-
-            <form onSubmit={onSaveToy} >
-                <label htmlFor="name">Name : </label>
-                <input type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Enter name..."
-                    value={name}
-                    onChange={handleChange}
-                    required
-                />
-
-                <label htmlFor="price">Price : </label>
-                <input type="number"
-                    name="price"
-                    id="price"
-                    placeholder="Enter price"
-                    min="1"
-                    value={price || ''}
-                    onChange={handleChange}
-                    required
-                />
-
-                <label htmlFor="labels">Labels : </label>
-                <select multiple
-                    name="labels"
-                    id="labels"
-                    value={toyLabels}
-                    onChange={handleChange}
-                >
-                    {labels.map(label => <option key={label} value={label}>{label}</option>)}
-                </select>
-
-                <label htmlFor="inStock">
-                    <input type="checkbox"
-                        name="inStock"
-                        id="inStock"
-                        checked={inStock}
-                        onChange={handleChange}
-                    />
-                    In stock
-                </label>
-
-                <div className="form-actions">
-                    <button>{toyToEdit._id ? 'Save' : 'Add'}</button>
-                    <Link to="/toy" className="btn btn-outline btn-secondary">Cancel</Link>
-                </div>
-            </form>
+            <ToyEditForm toy={toyToEdit} onSave={onSaveToy} />
         </section>
     )
 }
