@@ -14,30 +14,29 @@ export function ToyEdit() {
     const [toyToEdit, setToyToEdit] = useState(toyId ? null : toyService.getEmptyToy())
 
     useEffect(() => {
-        if (toyId) loadToy()
-    }, [])
-
-    function loadToy() {
-        toyService.getById(toyId)
-            .then(toy => setToyToEdit(toy))
-            .catch(err => {
+        async function loadToy() {
+            try {
+                const toy = await toyService.getById(toyId)
+                setToyToEdit(toy)
+            } catch (err) {
                 console.log('Had issues in toy edit', err)
                 showErrorMsg('Cannot load toy')
                 navigate('/toy')
-            })
-    }
+            }
+        }
+        if (toyId) loadToy()
+    }, [toyId, navigate])
 
-    // Returns the promise so Formik knows when the submit is over (isSubmitting)
-    function onSaveToy(toy) {
-        return saveToy(toy)
-            .then(() => {
-                showSuccessMsg('Toy Saved!')
-                navigate('/toy')
-            })
-            .catch(err => {
-                console.log('Had issues in toy edit', err)
-                showErrorMsg('Cannot save toy')
-            })
+    // async returns a promise, so Formik knows when the submit is over (isSubmitting)
+    async function onSaveToy(toy) {
+        try {
+            await saveToy(toy)
+            showSuccessMsg('Toy Saved!')
+            navigate('/toy')
+        } catch (err) {
+            console.log('Had issues in toy edit', err)
+            showErrorMsg('Cannot save toy')
+        }
     }
 
     if (!toyToEdit) return <div>Loading...</div>
