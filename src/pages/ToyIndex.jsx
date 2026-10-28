@@ -14,24 +14,28 @@ export function ToyIndex() {
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
     useEffect(() => {
-        loadToys()
-            .catch(() => {
+        // The effect itself can't be async (React expects nothing or a cleanup back), so define and call one
+        async function onLoadToys() {
+            try {
+                await loadToys()
+            } catch {
                 showErrorMsg('Cannot load toys!')
-            })
+            }
+        }
+        onLoadToys()
     }, [filterBy])
 
     function onSetFilter(filterBy) {
         setFilterBy(filterBy)
     }
 
-    function onRemoveToy(toyId) {
-        removeToyOptimistic(toyId)
-            .then(() => {
-                showSuccessMsg('Toy removed')
-            })
-            .catch(() => {
-                showErrorMsg('Cannot remove toy')
-            })
+    async function onRemoveToy(toyId) {
+        try {
+            await removeToyOptimistic(toyId)
+            showSuccessMsg('Toy removed')
+        } catch {
+            showErrorMsg('Cannot remove toy')
+        }
     }
 
     return (

@@ -17,17 +17,17 @@ export function ToyDashboard() {
     const [stats, setStats] = useState(null)
 
     useEffect(() => {
-        loadStats()
-    }, [])
-
-    function loadStats() {
-        toyService.getStats()
-            .then(stats => setStats(stats))
-            .catch(err => {
+        async function loadStats() {
+            try {
+                const stats = await toyService.getStats()
+                setStats(stats)
+            } catch (err) {
                 console.log('Had issues loading stats', err)
                 showErrorMsg('Cannot load stats')
-            })
-    }
+            }
+        }
+        loadStats()
+    }, [])
 
     if (!stats) return <div>Loading...</div>
 
