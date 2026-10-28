@@ -1,0 +1,6 @@
+/* Selected-label chips inside the select box: equal-width columns that wrap onto new rows */
+.label-chips {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+    gap: var(--space-1);
+}

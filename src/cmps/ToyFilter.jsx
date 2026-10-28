@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react'
-import { TextField, MenuItem, Checkbox, ListItemText, Chip, Box } from '@mui/material'
+import { TextField, MenuItem } from '@mui/material'
 
 import { utilService } from '../services/util.service.js'
-import { toyService } from '../services/toy.service.js'
 import { useEffectUpdate } from '../hooks/useEffectUpdate.js'
+
+import { LabelsSelect } from './LabelsSelect.jsx'
 
 // Shared by all filter fields - sizing comes from the grid in ToyFilter.css, colors from mui.css
 const fieldProps = { size: 'small', fullWidth: true }
@@ -14,7 +15,6 @@ export function ToyFilter({ filterBy, onSetFilter }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const onSetFilterDebounce = useRef(utilService.debounce(onSetFilter, 300))
-    const labels = toyService.getLabels()
 
     useEffectUpdate(() => {
         onSetFilterDebounce.current(filterByToEdit)
@@ -52,29 +52,11 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                     <MenuItem value="false">Out of stock</MenuItem>
                 </TextField>
 
-                <TextField select {...fieldProps}
-                    label="Labels"
+                <LabelsSelect {...fieldProps}
                     name="labels"
                     value={filterByToEdit.labels}
                     onChange={handleChange}
-                    slotProps={{
-                        select: {
-                            multiple: true,
-                            renderValue: selected => (
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                    {selected.map(label => <Chip key={label} label={label} size="small" />)}
-                                </Box>
-                            ),
-                        },
-                    }}
-                >
-                    {labels.map(label => (
-                        <MenuItem key={label} value={label}>
-                            <Checkbox size="small" checked={filterByToEdit.labels.includes(label)} />
-                            <ListItemText primary={label} />
-                        </MenuItem>
-                    ))}
-                </TextField>
+                />
 
                 <TextField select {...fieldProps}
                     label="Sort by"
