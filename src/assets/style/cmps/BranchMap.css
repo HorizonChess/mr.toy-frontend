@@ -1,0 +1,20 @@
+.branch-map {
+    display: grid;
+    gap: var(--space-3);
+
+    /* Buttons sit in a row, hugging their text */
+    .branch-btns {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        gap: var(--space-2);
+    }
+
+    /* Google's map fills its container, so the container needs a real height */
+    .map-container {
+        height: clamp(20rem, 55vh, 32rem);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+    }
+}
